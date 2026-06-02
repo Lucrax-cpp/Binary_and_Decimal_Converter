@@ -1,0 +1,1 @@
+This is the first piece of code that I upload to the internet, if you see something wrong don't hesitate to fix it!
