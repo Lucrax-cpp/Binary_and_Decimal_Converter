@@ -36,8 +36,6 @@ int main() {
             cin >> decimalInput;
 
             //Print the result
-            //Converts the decimal to binary (f"{userInput:b})
-            // Nota: bitset<32> convierte a binario de 32 bits. .to_string() lo hace texto, y el resto elimina los ceros a la izquierda.
             string binaryStr = bitset<32>(decimalInput).to_string();
             binaryStr.erase(0, min(binaryStr.find_first_not_of('0'), binaryStr.size() - 1));
             
