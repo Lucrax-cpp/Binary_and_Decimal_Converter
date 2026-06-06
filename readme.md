@@ -9,5 +9,5 @@ cd Converter
 2. Open the converter
 ```bash
 ./main.py
-./main.cpp
+g++ main
 ```
