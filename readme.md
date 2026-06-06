@@ -1,4 +1,4 @@
-This is the first piece of code that I upload to the internet, if you see something wrong don't hesitate to fix it!
+This is the first piece of code that I upload to the internet, if you see something wrong don't hesitate to issue it!
 
 ## How to install the converter
 1. Clone the repository:
