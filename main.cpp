@@ -1,53 +1,88 @@
+#include <cstdint>
 #include <iostream>
 #include <string>
-#include <bitset>
 
-using namespace std;
+bool IsValidBinary(const std::string& binary) {
+  for (char bit : binary) {
+    if (bit != '0' && bit != '1') {
+      return false;
+    }
+  }
+
+  return !binary.empty();
+}
+
+int32_t BinaryToDecimal(const std::string& binary) {
+  int32_t decimal_number = 0;
+
+  for (char bit : binary) {
+    decimal_number = decimal_number * 2 + (bit - '0');
+  }
+
+  return decimal_number;
+}
+
+std::string DecimalToBinary(int32_t decimal_number) {
+  if (decimal_number == 0) {
+    return "0";
+  }
+
+  std::string binary;
+
+  while (decimal_number > 0) {
+    binary = std::to_string(decimal_number % 2) + binary;
+    decimal_number /= 2;
+  }
+
+  return binary;
+}
 
 int main() {
-    //Variables
-    string userInput = "";
+  while (true) {
+    std::cout << "What type of number system do you want to convert?\n";
+    std::cout << "1. Binary to Decimal\n";
+    std::cout << "2. Decimal to Binary\n";
+    std::cout << "3. Exit\n";
 
-    while (true) {
-        //We ask the user
-        cout << "What type of number system you want to convert?" << endl;
-        cout << "1. Binary" << endl;
-        cout << "2. Decimal" << endl;
-        cout << "3. Exit" << endl;
+    std::string choice;
+    std::cout << "Choice: ";
+    std::cin >> choice;
 
-        //We recieve the input
-        cin >> userInput;
+    if (choice == "1") {
+      std::string binary_number;
+      std::cout << "Enter a binary number: ";
+      std::cin >> binary_number;
 
-        if (userInput == "1") {
-            cout << "What binary number you want to convert to decimal?" << endl;
-            cin >> userInput;
-            
-            //Converts the binary to decimal
-            int changedNumber = stoi(userInput, 0, 2);
-            
-            //Print the result
-            cout << "The converted number is " << to_string(changedNumber) << endl;
-            cout << "" << endl;
-        }
+      if (!IsValidBinary(binary_number)) {
+        std::cout << "Invalid binary number.\n";
+        continue;
+      }
 
-        if (userInput == "2") {
-            cout << "What decimal number you want to convert to binary?" << endl;
-            int decimalInput;
-            cin >> decimalInput;
+      std::cout << "The converted number is "
+                << BinaryToDecimal(binary_number) << "\n";
 
-            //Print the result
-            string binaryStr = bitset<32>(decimalInput).to_string();
-            binaryStr.erase(0, min(binaryStr.find_first_not_of('0'), binaryStr.size() - 1));
-            
-            cout << "The converted number is " << binaryStr << endl;
-            cout << "" << endl;
-        }
+    } else if (choice == "2") {
+      int32_t decimal_number;
+      std::cout <<"Enter a decimal number: ";
 
-        if (userInput == "3") {
-            cout << "Goodbye!" << endl;
-            break;
-        }
+      if (!(std::cin >> decimal_number)) {
+        std::cout << "Invalid decimal number.\n";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        continue;
+      }
+
+      std::cout << "The converted number is "
+                << DecimalToBinary(decimal_number) << "\n";
+
+    } else if (choice == "3") {
+      std::cout << "Goodbye!\n";
+      break;
+
+    } else {
+      std::cout << "Invalid option.\n";
     }
+  }
 
-    return 0;
+  return 0;
 }
